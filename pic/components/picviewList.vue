@@ -11,7 +11,7 @@
     <ul class="pins">
       <li :key="index" v-for="(item,index) in imgList">
         <nuxt-link :to="'/'+index" class="img">
-          <img :src="item.src" alt="">
+          <img src="../static/upload/1572416795363.jpg" alt="">
         </nuxt-link>
         <span class="name">
           {{item.title}}
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data(){
     return {
@@ -89,6 +90,12 @@ export default {
   methods:{
     getData(){  
       console.log(this.$route.name)
+      axios.get('http://192.168.1.14:1000/getimg',{}).then((req,res)=>{
+        console.log(req)
+        if(req.data.msg=="success"){
+          this.imgList=req.data.data;
+        }
+      })
     }
   },
   mounted(){

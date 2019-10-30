@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.all('*', function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://192.168.1.14:8080');
+  res.header('Access-Control-Allow-Origin', '*');
   //Access-Control-Allow-Headers ,可根据浏览器的F12查看,把对应的粘贴在这里就行
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Allow-Methods', '*');
@@ -29,8 +29,11 @@ app.post('/addImages',(req,res)=>{
     let PUBLIC_PATH = './public';
     console.log("PUBLIC_PATH:" + PUBLIC_PATH);
     console.log(__dirname);
-    let filedr = "/upload";
+    // let filedr = "/upload";
+    let filedr = "./../pic/static/upload"
+    console.log(__dirname + filedr);
     form.uploadDir = path.join(__dirname + filedr);
+    console.log(form.uploadDir)
     form.keepExtensions = true; //保留后缀
     form.maxFieldsSize = 2 * 1024 * 1024;
     //处理图片
@@ -70,6 +73,16 @@ app.post('/addCollect',(req,res)=>{
   res.send({
     code:200,
     msg:'success'
+  })
+})
+app.get('/getimg',(req,res)=>{
+  db.appGetImg().then((data)=>{
+    console.log(data)
+    res.send({
+      code:200,
+      data:data,
+      msg:'success'
+    })
   })
 })
 app.listen(1000);

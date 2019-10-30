@@ -29,6 +29,19 @@ const db={
       });
     
     });
+  },
+  appGetImg:function(){
+   
+    return new Promise(function(resolve,reject){
+      MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
+          if (err) throw err;
+          console.log("数据库已创建!");
+          var dbase = db.db("pic");
+          var data=dbase.collection("previewImage").find({}).toArray(function(err,docs){
+          resolve(docs);
+        });
+      })
+    });
   }
 }
 module.exports=db
