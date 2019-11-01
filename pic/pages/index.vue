@@ -9,53 +9,6 @@ import picviewList from '~/components/picviewList.vue'
 export default {
   data(){
     return {
-      imgList:[
-        {
-          src:'./../static/images/16c01.jpg',
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:'./_nuxt/static/images/16c01.jpg',
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:'./_nuxt/static/images/16c01.jpg',
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:'./_nuxt/static/images/16c01.jpg',
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:'./_nuxt/static/images/16c01.jpg',
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:'./_nuxt/static/images/16c01.jpg',
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:'./_nuxt/static/images/16c01.jpg',
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:'./_nuxt/static/images/16c01.jpg',
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-         {
-          src:'./_nuxt/static/images/16c01.jpg',
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-      ]
     }
   },
   components: {

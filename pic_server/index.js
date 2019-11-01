@@ -58,7 +58,7 @@ app.post('/addImages',(req,res)=>{
         let data = {};
        
         data.name = avatarName;
-        data.url = filedr + avatarName;
+        data.url = 'upload' + avatarName;
 
         db.add(data.url)
         datas.data = data

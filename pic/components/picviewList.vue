@@ -6,12 +6,13 @@
     <nuxt-link to="">推荐</nuxt-link>
     <nuxt-link to="">专题</nuxt-link>
   </div>
-  <!-- <img src="./../static/images/16c01.jpg" alt=""> -->
   <div class="post-list">
+    <!-- <img src="/../static/upload/1572571598146.jpg" alt=""> -->
     <ul class="pins">
+      
       <li :key="index" v-for="(item,index) in imgList">
         <nuxt-link :to="'/'+index" class="img">
-          <img src="../static/upload/1572416795363.jpg" alt="">
+          <img :src="base_url" alt="">
         </nuxt-link>
         <span class="name">
           {{item.title}}
@@ -38,52 +39,8 @@ import axios from 'axios'
 export default {
   data(){
     return {
+      base_url:'./../static',
       imgList:[
-        {
-          src:require('./../static/images/16c01.jpg'),
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:require('./../static/images/16c01.jpg'),
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:require('./../static/images/16c01.jpg'),
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:require('./../static/images/16c01.jpg'),
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:require('./../static/images/16c01.jpg'),
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:require('./../static/images/16c01.jpg'),
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:require('./../static/images/16c01.jpg'),
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-        {
-          src:require('./../static/images/16c01.jpg'),
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
-         {
-          src:require('./../static/images/16c01.jpg'),
-          title:'爆乳姐妹花魅惑私房 床上缠绵上演拉拉诱惑',
-          time:'2019-09-16'
-        },
       ]
     }
   },
@@ -94,6 +51,11 @@ export default {
         console.log(req)
         if(req.data.msg=="success"){
           this.imgList=req.data.data;
+          const imgs = req.data.data;
+          
+          this.imgList = imgs.forEach(element => {
+            return require(this.base_url+element.breviary);
+          });
         }
       })
     }

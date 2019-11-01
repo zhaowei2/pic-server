@@ -54,7 +54,6 @@ module.exports = {
     vendor:['axios']
   },
   router: {
-    middleware: 'auth'
   }
 
 }

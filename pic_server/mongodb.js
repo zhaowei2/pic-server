@@ -21,7 +21,6 @@ const db={
       if (err) throw err;
       console.log("数据库已创建!");
       var dbase = db.db("pic");
-
       dbase.collection("previewImage").insertOne(data, function(err, res) {
         if (err) throw err;
         console.log("文档插入成功");
@@ -35,7 +34,7 @@ const db={
     return new Promise(function(resolve,reject){
       MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
-          console.log("数据库已创建!");
+          console.log("数据库获取!");
           var dbase = db.db("pic");
           var data=dbase.collection("previewImage").find({}).toArray(function(err,docs){
           resolve(docs);
