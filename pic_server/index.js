@@ -6,10 +6,10 @@ const fs = require('fs')
 const app = express()
 
 const db=require('./mongodb')
+app.use(bodyParser.urlencoded({extended:false}))
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -69,15 +69,47 @@ app.post('/addImages',(req,res)=>{
 // 上传图片列表
 app.post('/addCollect',(req,res)=>{
   console.log(req.body)
-  db.addImgList(req.body)
+  // db.addImgList(req.body)
+  let times = new Date().getTime()
+  let data={...req.body,time:times,hot:0}
+  db.addImgList(data)
   res.send({
     code:200,
     msg:'success'
   })
 })
+// 获取图片
 app.get('/getimg',(req,res)=>{
-  db.appGetImg().then((data)=>{
-    console.log(data)
+  let pageSize =1;
+  let cagetory =1;
+  let pageNum  =1;
+  if(req.query.pageSize){
+    pageSize = req.query.pageSize
+  }
+  if(req.query.cagetory){
+    cagetory = req.query.cagetory
+  }
+  if(req.query.pageNum){
+    pageNum = req.query.pageNum
+  }
+  db.appGetImg({
+    pageSize:pageSize,
+    cagetory:cagetory,
+    pageNum:pageNum
+  }).then((data)=>{
+    res.send({
+      code:200,
+      data:data,
+      msg:'success'
+    })
+  })
+})
+
+app.get('/getimgDetial',(req,res)=>{
+  db.appGetImgDetail({
+    id:req.query.id
+  }).then(data=>{
+    console.log(data);
     res.send({
       code:200,
       data:data,

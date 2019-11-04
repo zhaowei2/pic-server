@@ -7,12 +7,11 @@
     <nuxt-link to="">专题</nuxt-link>
   </div>
   <div class="post-list">
-    <!-- <img src="/../static/upload/1572571598146.jpg" alt=""> -->
+    <!-- <img src="upload/1572571598146.jpg" alt=""> -->
     <ul class="pins">
-      
       <li :key="index" v-for="(item,index) in imgList">
-        <nuxt-link :to="'/'+index" class="img">
-          <img :src="base_url" alt="">
+        <nuxt-link :to="'/'+item._id" class="img">
+          <img :src="item.breviary" alt="">
         </nuxt-link>
         <span class="name">
           {{item.title}}
@@ -28,7 +27,9 @@
   layout="prev, pager, next"
   prev-text="上一页"
   next-text="下一页"
-  :total="1000">
+  @current-change="handleCurrentChange"
+  :page-size="pageSize"
+  :total="imgTotal">
 </el-pagination>
 </div>
   <!-- <nuxt /> -->
@@ -39,25 +40,46 @@ import axios from 'axios'
 export default {
   data(){
     return {
-      base_url:'./../static',
-      imgList:[
-      ]
+      base_url:'./../static/',
+      imgList:[],
+      imgTotal:3,
+      pageSize:12,
+      pageNum:1,
+      cagetoryList:{
+        index:11,
+        sexy:1,
+        japan:2,//rib
+        tawan:3,//台湾
+        pure:4,//清纯
+      }
     }
   },
+  created(){
+
+  },
   methods:{
+    // 获取图片
     getData(){  
-      console.log(this.$route.name)
-      axios.get('http://192.168.1.14:1000/getimg',{}).then((req,res)=>{
-        console.log(req)
-        if(req.data.msg=="success"){
-          this.imgList=req.data.data;
-          const imgs = req.data.data;
-          
-          this.imgList = imgs.forEach(element => {
-            return require(this.base_url+element.breviary);
-          });
+      let  cagetory= this.$route.name;
+      console.log(cagetory)
+      axios.get('http://106.12.26.79:1000/getimg',{
+        params:{
+          pageSize:this.pageSize,
+          pageNum:this.pageNum,
+          cagetory:this.cagetoryList[cagetory]
+        }
+      }).then((res)=>{
+        console.log(res.data.data)
+        if(res.data.msg=="success"){
+          this.imgList = res.data.data.page;
+          this.imgTotal = res.data.data.total
         }
       })
+    },
+    handleCurrentChange(val){
+      console.log(val);
+      this.pageNum = val;
+      this.getData();
     }
   },
   mounted(){
