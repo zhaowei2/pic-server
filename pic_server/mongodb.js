@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
-var url = "mongodb://localhost:27017/runoob";
+var url = "mongodb://http://106.12.26.79:27017/runoob";
  
 const db={
   add:function(data){

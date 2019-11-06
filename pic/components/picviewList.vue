@@ -10,7 +10,7 @@
     <!-- <img src="upload/1572571598146.jpg" alt=""> -->
     <ul class="pins">
       <li :key="index" v-for="(item,index) in imgList">
-        <nuxt-link :to="'/'+item._id" class="img">
+        <nuxt-link :to="'/views?id='+item._id" class="img">
           <img :src="item.breviary" alt="">
         </nuxt-link>
         <span class="name">
@@ -40,7 +40,7 @@ import axios from 'axios'
 export default {
   data(){
     return {
-      base_url:'./../static/',
+      base_url:'http://106.12.26.79/',
       imgList:[],
       imgTotal:3,
       pageSize:12,
@@ -60,8 +60,8 @@ export default {
   methods:{
     // 获取图片
     getData(){  
+      // console.log(this.$route)
       let  cagetory= this.$route.name;
-      console.log(cagetory)
       axios.get('http://106.12.26.79:1000/getimg',{
         params:{
           pageSize:this.pageSize,
@@ -69,7 +69,6 @@ export default {
           cagetory:this.cagetoryList[cagetory]
         }
       }).then((res)=>{
-        console.log(res.data.data)
         if(res.data.msg=="success"){
           this.imgList = res.data.data.page;
           this.imgTotal = res.data.data.total

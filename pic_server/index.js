@@ -37,7 +37,7 @@ app.post('/addImages',(req,res)=>{
     form.keepExtensions = true; //保留后缀
     form.maxFieldsSize = 2 * 1024 * 1024;
     //处理图片
-    form.parse(req, function (err, fields, files) {
+    form.parse(req, function (err, fields, files) {+
         console.log(files.file);
         var filename = files.file.name
         var nameArray = filename.split('.');
@@ -71,7 +71,8 @@ app.post('/addCollect',(req,res)=>{
   console.log(req.body)
   // db.addImgList(req.body)
   let times = new Date().getTime()
-  let data={...req.body,time:times,hot:0}
+  let src = 'http://106.12.26.79/'+req.boy.breviary;
+  let data={...req.body,time:times,hot:0,breviary:src}
   db.addImgList(data)
   res.send({
     code:200,

@@ -54,8 +54,8 @@ export default {
   },
   methods:{
     getData(){  
-      console.log(this.$route)
-      let _id = this.$route.params.id;
+      let _id = this.$route.query.id;
+      console.log(_id)
       axios.get('http://106.12.26.79:1000/getimgDetial',{
         params:{
           id:_id,
